@@ -4,6 +4,12 @@ A chroma key (green screen removal) package in Python, vectorised with numpy.
 
 Algorithm from http://gc-films.com/chromakey.html.
 
+## Installation
+
+```bash
+pip install chromakey
+```
+
 ## TODO
 
 - Add OBS chroma key algorithm
