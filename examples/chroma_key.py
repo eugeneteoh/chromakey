@@ -7,6 +7,7 @@ from chromakey import chroma_key
 # https://sotamedialab.wordpress.com/2017/02/14/common-green-screen-photography-mistakes/
 image_path = Path(__file__).parent / "../uneven_green_green_lighting.png"
 image = Image.open(str(image_path))
+
 background_image = Image.new("RGB", image.size, "red")
 
 image = np.asarray(image)
