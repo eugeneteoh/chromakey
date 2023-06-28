@@ -7,7 +7,7 @@ Algorithm from http://gc-films.com/chromakey.html.
 ## Installation
 
 ```bash
-pip install chromakey
+pip install git+https://github.com/eugeneteoh/chromakey.git
 ```
 
 ## TODO
