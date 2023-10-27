@@ -1,6 +1,6 @@
 # chromakey
 
-A chroma key (green screen removal) package in Python, vectorised with numpy.
+A chroma key (green screen removal) package in Python, vectorised with numpy and pytorch.
 
 Algorithm from http://gc-films.com/chromakey.html.
 
