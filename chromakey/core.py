@@ -85,7 +85,7 @@ def chroma_key_vectorized(
     from kornia.filters import gaussian_blur2d
 
     image_ycbcr = rgb_to_ycbcr(image)
-    keycolor_rgb = torch.as_tensor([ImageColor.getrgb(kc) for kc in keycolor])[..., None, None]
+    keycolor_rgb = torch.as_tensor([ImageColor.getrgb(kc) for kc in keycolor], device=image.device)[..., None, None]
     keycolor_ycbcr = rgb_to_ycbcr(keycolor_rgb)
 
     dist = torch.sqrt(
