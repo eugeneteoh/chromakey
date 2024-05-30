@@ -81,8 +81,25 @@ def chroma_key_vectorized(
         mask: Shape (B, H, W).
     """
     import torch
-    from kornia.color import rgb_to_ycbcr
-    from kornia.filters import gaussian_blur2d
+    from torch import Tensor, nn
+
+    # https://github.com/kornia/kornia/blob/e461f92ff9ee035d2de2513859bee4069356bc25/kornia/color/ycbcr.py
+    def rgb_to_ycbcr(image: Tensor) -> Tensor:
+        if not isinstance(image, Tensor):
+            raise TypeError(f"Input type is not a Tensor. Got {type(image)}")
+
+        if len(image.shape) < 3 or image.shape[-3] != 3:
+            raise ValueError(f"Input size must have a shape of (*, 3, H, W). Got {image.shape}")
+
+        r: Tensor = image[..., 0, :, :]
+        g: Tensor = image[..., 1, :, :]
+        b: Tensor = image[..., 2, :, :]
+
+        delta: float = 0.5
+        y: Tensor = 0.299 * r + 0.587 * g + 0.114 * b
+        cb: Tensor = (b - y) * 0.564 + delta
+        cr: Tensor = (r - y) * 0.713 + delta
+        return torch.stack([y, cb, cr], -3)
 
     image_ycbcr = rgb_to_ycbcr(image)
     keycolor_rgb = torch.as_tensor([ImageColor.getrgb(kc) for kc in keycolor], device=image.device)[..., None, None]
@@ -100,7 +117,8 @@ def chroma_key_vectorized(
     ) / (tolb - tola)
     mask[dist >= tolb] = 1
     mask = 1 - mask
-    mask = gaussian_blur2d(mask[:, None, :, :], gaussian_filter_kernel_size, gaussian_filter_sigma)
+    # mask = gaussian_blur2d(mask[:, None, :, :], gaussian_filter_kernel_size, gaussian_filter_sigma)
+    mask = mask[:, None, :, :]
 
     out = torch.zeros_like(image, dtype=torch.float32)
     out = image - mask * keycolor_rgb
