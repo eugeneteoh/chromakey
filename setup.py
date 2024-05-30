@@ -11,7 +11,7 @@ setup(
     packages=find_packages(),
     install_requires=["Pillow", "scipy", "numpy"],
     extras_require={
-        "torch": ["torch", "kornia"]
+        "torch": ["torch"]
     },
     url="https://github.com/eugeneteoh/chromakey",
     author="Eugene Teoh",
