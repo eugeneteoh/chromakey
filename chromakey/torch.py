@@ -9,7 +9,7 @@ def chroma_key(
     tolb: torch.Tensor,
     background_image: torch.Tensor = None,
 ) -> tuple[torch.Tensor, torch.Tensor]:
-    """Vectorized chroma key using pytorch and kornia, supports extra batch dimension.
+    """Vectorized chroma key using pytorch, supports extra batch dimension.
 
     Args:
         image: Shape (B, C, H, W), dtype=torch.float32, range=[0, 1].

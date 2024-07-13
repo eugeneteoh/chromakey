@@ -1,6 +1,5 @@
 from PIL import Image
 import numpy as np
-from scipy.ndimage import gaussian_filter
 
 def chroma_key(
     image: np.ndarray,
@@ -45,7 +44,6 @@ def chroma_key(
     ) / (tolb - tola)
     mask[dist >= tolb] = 1
     mask = 1 - mask
-    mask = gaussian_filter(mask, sigma=gaussian_filter_sigma)
 
     out = np.zeros_like(image, dtype=np.float32)
     out = image - mask[..., None] * keycolor_rgb

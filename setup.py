@@ -9,7 +9,7 @@ setup(
     name="chromakey",
     version="0.1.1",
     packages=find_packages(),
-    install_requires=["Pillow", "scipy", "numpy"],
+    install_requires=["Pillow", "numpy"],
     extras_require={
         "torch": ["torch"]
     },
