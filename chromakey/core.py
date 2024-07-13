@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 
+
 def chroma_key(
     image: np.ndarray,
     keycolor: str = "#00FF00",
@@ -53,4 +54,3 @@ def chroma_key(
     out = np.uint8(out)
 
     return out, mask
-

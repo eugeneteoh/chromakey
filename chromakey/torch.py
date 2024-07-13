@@ -1,6 +1,6 @@
-
 import torch
 from PIL import ImageColor
+
 
 def chroma_key(
     image: torch.Tensor,
@@ -29,7 +29,9 @@ def chroma_key(
             raise TypeError(f"Input type is not a Tensor. Got {type(image)}")
 
         if len(image.shape) < 3 or image.shape[-3] != 3:
-            raise ValueError(f"Input size must have a shape of (*, 3, H, W). Got {image.shape}")
+            raise ValueError(
+                f"Input size must have a shape of (*, 3, H, W). Got {image.shape}"
+            )
 
         r = image[..., 0, :, :]
         g = image[..., 1, :, :]
@@ -45,7 +47,9 @@ def chroma_key(
     background_image = background_image * 255
 
     image_ycbcr = rgb_to_ycbcr(image)
-    keycolor_rgb = torch.as_tensor([ImageColor.getrgb(kc) for kc in keycolor], device=image.device)[..., None, None]
+    keycolor_rgb = torch.as_tensor(
+        [ImageColor.getrgb(kc) for kc in keycolor], device=image.device
+    )[..., None, None]
     keycolor_ycbcr = rgb_to_ycbcr(keycolor_rgb)
 
     dist = torch.sqrt(
