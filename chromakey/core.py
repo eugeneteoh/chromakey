@@ -5,10 +5,9 @@ import numpy as np
 def chroma_key(
     image: np.ndarray,
     keycolor: str = "#00FF00",
-    background_image: np.ndarray = None,
     tola: int = 10,
     tolb: int = 30,
-    gaussian_filter_sigma: float = 1.5,
+    background_image: np.ndarray = None,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Chroma key.
 
@@ -18,7 +17,6 @@ def chroma_key(
         background_image: Shape (H, W, C). Defaults to None.
         tola: Tolerance 1. Defaults to 10.
         tolb: Tolerance 2. Defaults to 30.
-        gaussian_filter_sigma: Gaussian blur sigma. Defaults to 1.5.
 
     Returns:
         out: Shape (H, W, C).
