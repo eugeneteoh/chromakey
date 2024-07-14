@@ -9,14 +9,15 @@ setup(
     name="chromakey",
     version="0.1.1",
     packages=find_packages(),
-    install_requires=["Pillow", "scipy", "numpy"],
+    install_requires=["Pillow", "numpy"],
     extras_require={
-        "torch": ["torch", "kornia"]
+        "torch": ["torch"],
+        "dev": ["pytest", "pre-commit", "ruff"],
     },
     url="https://github.com/eugeneteoh/chromakey",
     author="Eugene Teoh",
     author_email="eugenetwc1@gmail.com",
     license="MIT",
     long_description=long_description,
-    long_description_content_type='text/markdown',
+    long_description_content_type="text/markdown",
 )
