@@ -45,7 +45,8 @@ def chroma_key(
     """
 
     image = image * 255
-    background_image = background_image * 255
+    if background_image is not None:
+        background_image = background_image * 255
 
     image_ycbcr = rgb_to_ycbcr(image)
     keycolor_rgb = torch.as_tensor(
